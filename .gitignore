@@ -1,0 +1,25 @@
+# Datasets and downloads: large files never go into git (re-download with src/ scripts)
+data/
+
+# Trained model weights: large binaries; share via release / Hugging Face if needed
+*.pt
+*.pth
+*.ckpt
+runs/
+
+# Python / Jupyter clutter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+Thumbs.db
+
+# Private handoff notes (personal data, PhD application strategy). Local only.
+PROJECT_CONTEXT.md
+CLAUDE.md
+LEARNING_PLAN.md
+notes/

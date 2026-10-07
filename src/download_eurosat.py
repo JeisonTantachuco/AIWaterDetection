@@ -11,6 +11,7 @@ but read the comments: they explain choices you will reuse in your own scripts.
 """
 
 import hashlib
+import socket
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -19,6 +20,11 @@ URL = "https://zenodo.org/api/records/7711810/files/EuroSAT_MS.zip/content"
 # The MD5 is published on Zenodo. Checking it proves the 2 GB file arrived complete and
 # uncorrupted -- a broken zip would otherwise fail much later, in a confusing way.
 MD5 = "091174add3c8e680a49244acf185b9f0"
+
+# Without a timeout, a dropped connection makes the download wait forever (it happened:
+# stuck at 99.3% for hours). With it, the script fails after 60 s of silence instead.
+# To finish a partial zip without restarting:  curl -L -C - -o <zip> <URL>
+socket.setdefaulttimeout(60)
 
 # Paths are built relative to this file, so the script works no matter which folder you
 # run it from. data/ is in .gitignore: datasets never go into git.
